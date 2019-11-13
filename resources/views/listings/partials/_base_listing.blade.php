@@ -2,7 +2,7 @@
   <img src="https://via.placeholder.com/64" class="mr-3" alt="{{ $listing->title }}">
   <div class="media-body">
     <h5 class="mt-0">
-    	<strong><a href="">{{ $listing->title }}</a></strong>
+    	<strong><a href="{{ route('listing.show', [$area, $listing]) }}">{{ $listing->title }}</a></strong>
     	@if($area->children->count())
 			in {{ $listing->area->name }}
     	@endif
