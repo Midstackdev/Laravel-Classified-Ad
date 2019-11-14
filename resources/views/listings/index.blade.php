@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
     <h4>{{ $category->parent->name}} &nbsp; > &nbsp; {{ $category->name }}</h4>
     <hr>
 
@@ -14,5 +13,4 @@
     @else
         <p class="lead">No listing found.</p>
     @endif
-</div>
 @endsection

@@ -6,10 +6,12 @@
 <body>
     <div id="app">
         @include('layouts.partials._navigation')
-
-        <main class="py-4">
-            @yield('content')
-        </main>
+		<div class="container">
+	        <main class="py-4">
+				@include('layouts.partials._alerts')
+	            @yield('content')
+	        </main>
+        </div>
     </div>
 </body>
 </html>

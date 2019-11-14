@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
     <div class="row">
     	@if(Auth::check())
 			<div class="col-md-3">
@@ -9,9 +8,14 @@
 				  <li class="nav-item">
 				    <a class="nav-link active" href="#">Email a friend</a>
 				  </li>
-				  <li class="nav-item">
-				    <a class="nav-link" href="#">Add to favourite</a>
-				  </li>
+				  @if(!$listing->favouritedBy(Auth::user()))
+					  <li class="nav-item">
+					    <a class="nav-link" href="#" onclick="event.preventDefault(); document.getElementById('lisiting-favourite-form').submit();">Add to favourite</a>
+					    <form action="{{ route('listings.favourites.store', [$area, $listing]) }}" method="post" id="lisiting-favourite-form" class="hidden">
+					    	@csrf
+					    </form>
+					  </li>
+				  @endif
 				  <li class="nav-item">
 				    <a class="nav-link" href="#">Link</a>
 				  </li>
@@ -59,5 +63,4 @@
 			</div>
 		</div>
     </div>
-</div>
 @endsection

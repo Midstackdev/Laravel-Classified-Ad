@@ -11,7 +11,6 @@
     	<li class="list-inline-item">{{ $listing->created_at->diffForHumans() }}</li>
     	<li class="list-inline-item">{{ $listing->user->name }}</li>
     </ul>
+   {{ $links }}
   </div>
 </div>
-
-@yield('links')
