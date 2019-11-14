@@ -9,7 +9,8 @@
     </h5>
     <ul class="list-inline">
     	<li class="list-inline-item">{{ $listing->created_at->diffForHumans() }}</li>
-    	<li class="list-inline-item">{{ $listing->user->name }}</li>
+      <li class="list-inline-item">{{ $listing->user->name }}</li>
+    	<li class="list-inline-item">{{ $listing->views() }} {{Str::plural('view', $listing->views())}}</li>
     </ul>
    {{ $links }}
   </div>
