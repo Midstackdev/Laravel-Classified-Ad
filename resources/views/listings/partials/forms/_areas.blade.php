@@ -1,7 +1,6 @@
 <div class="form-group">
 	<label for="area">Area</label>
-	<select name="area_id" id="area" class="form-control @error('area_id') is-invalid @enderror"
-	{{ isset($listing) && $listing->live() ? 'disabled' : ''}}>
+	<select name="area_id" id="area" class="form-control @error('area_id') is-invalid @enderror">
 		@foreach($areas as $country)
 			<optgroup label="{{ $country->name }}">
 				@foreach($country->children as $state)
