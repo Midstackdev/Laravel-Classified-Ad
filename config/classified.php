@@ -2,7 +2,8 @@
 
 return [
 	'defaults' => [
-		'area' => 'us'
+		'area' => 'us',
+		'email' => 'hello@fresh.com',
 	]
 
 ];

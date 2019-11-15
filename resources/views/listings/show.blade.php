@@ -44,10 +44,17 @@
 					@if (Auth::guest())
 						<p><a href="/register">Sign up</a> for an account or <a href="/login">sign in</a> to contact listing owners</p>
 					@else
-						<form action="" method="post">
+						<form action="{{ route('listing.contact.store', [$area, $listing]) }}" method="post">
+							@csrf
 							<div class="form-group">
 								<label for="message">Message</label>
-								<textarea name="message" id="message" cols="30" rows="5" class="form-control"></textarea>
+								<textarea name="message" id="message" cols="30" rows="5" class="form-control  @error('message') is-invalid @enderror"></textarea>
+
+								@error('message')
+								    <span class="invalid-feedback" role="alert">
+								        <strong>{{ $message }}</strong>
+								    </span>
+								@enderror
 							</div>
 							<div class="form-group">
 								<button type="submit" class="btn btn-outline-primary">Send</button>
