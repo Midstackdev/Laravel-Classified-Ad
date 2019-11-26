@@ -42,6 +42,10 @@
 
 						<div class="form-group">
 							<button type="submit" class="btn btn-outline-dark">Save</button>
+
+							@if(!$listing->live())
+								<button type="submit" name="payment" value="true" class="btn btn-outline-success float-right">Continue to payment</button>
+							@endif	
 						</div>
 
 						@if($listing->live())

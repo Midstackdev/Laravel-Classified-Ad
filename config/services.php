@@ -30,4 +30,11 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'braintree' => [
+        'key' => env('BRAINTREE_PUBLIC_KEY'),
+        'secret' => env('BRAINTREE_PRIVATE_KEY'),
+        'environment' => env('BRAINTREE_ENV'),
+        'merchant' => env('BRAINTREE_MERCHANT_ID'),
+    ],
+
 ];

@@ -6,6 +6,9 @@ Auth::routes();
 
 Route::get('/user/area/{area}', 'User\AreaController@store')->name('user.area.store');
 
+Route::get('/braintree/token', 'BraintreeController@token');
+
+
 Route::group(['prefix' => '/{area}'], function() {
     
     /**
@@ -31,6 +34,9 @@ Route::group(['prefix' => '/{area}'], function() {
         
         Route::post('/{listing}/contact', 'ListingContactController@store')->name('listing.contact.store');
 
+        Route::get('/{listing}/payment', 'ListingPaymentController@show')->name('listing.payment.show');
+        Route::post('/{listing}/payment', 'ListingPaymentController@store')->name('listing.payment.store');
+
         Route::group(['middleware' => 'auth'], function() {
             Route::get('/create', 'ListingController@create')->name('listings.create');
             Route::post('/', 'ListingController@store')->name('listings.store');
@@ -44,3 +50,5 @@ Route::group(['prefix' => '/{area}'], function() {
 
 });
 
+
+ 
