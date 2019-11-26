@@ -40,8 +40,14 @@
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{ route('listing.unpublished.index', [$area]) }}">
+                                {{ __('Unpublished listing') }} ({{ $unpublishedListingCount }})
+                            </a>
+                            <a class="dropdown-item" href="{{ route('listing.published.index', [$area]) }}">
+                                {{ __('Published listing') }} ({{ $publishedListingCount }})
+                            </a>
                             <a class="dropdown-item" href="{{ route('listings.create', [$area]) }}">
-                                {{ __('Create listing') }}
+                                {{ __('New listing') }}
                             </a>
 
                         </div>
