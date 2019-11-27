@@ -24,6 +24,9 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
+        "algoliasearch": "^3.35.1",
+        "autocomplete-js": "^2.7.1",
+        "autocomplete.js": "^0.37.0",
         "braintree-web": "^2.*"
     }
 }

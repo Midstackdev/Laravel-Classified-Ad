@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+    @include('listings.partials._search')
+    
     <div class="card">
         <div class="card-body">
             <div class="row">
