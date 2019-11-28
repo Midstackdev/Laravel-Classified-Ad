@@ -6,7 +6,7 @@
 			<div class="col-md-3">
 				<ul class="nav flex-column nav-pills">
 				  <li class="nav-item">
-				    <a class="nav-link active" href="#">Email a friend</a>
+				    <a class="nav-link active" href="{{ route('listing.share.index', [$area, $listing]) }}">Email a friend</a>
 				  </li>
 				  @if(!$listing->favouritedBy(Auth::user()))
 					  <li class="nav-item">
