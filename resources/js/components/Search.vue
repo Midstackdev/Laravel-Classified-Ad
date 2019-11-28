@@ -10,10 +10,17 @@
 
 <script>
 	import { listingsautocomplete } from '../helpers/autocomplete.js'
-	
+
 	export default {
+		props: [
+			'categoryId',
+			'areaIds'
+		],
 		mounted () {
-			listingsautocomplete('#listing-search')
+			listingsautocomplete('#listing-search', {
+				categoryId: this.categoryId,
+				areaIds: this.areaIds
+			})
 		}
 	}
 </script>

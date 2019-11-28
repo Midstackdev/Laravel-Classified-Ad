@@ -10725,8 +10725,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['categoryId', 'areaIds'],
   mounted: function mounted() {
-    Object(_helpers_autocomplete_js__WEBPACK_IMPORTED_MODULE_0__["listingsautocomplete"])('#listing-search');
+    Object(_helpers_autocomplete_js__WEBPACK_IMPORTED_MODULE_0__["listingsautocomplete"])('#listing-search', {
+      categoryId: this.categoryId,
+      areaIds: this.areaIds
+    });
   }
 });
 
@@ -61076,20 +61080,56 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var client = algoliasearch__WEBPACK_IMPORTED_MODULE_1___default()('8JY9VUMZR2', '66ae6f5cb7202b6ea9120f6bc3c764d5');
-var listingsautocomplete = function listingsautocomplete(selector) {
+var listingsautocomplete = function listingsautocomplete(selector, _ref) {
+  var categoryId = _ref.categoryId,
+      areaIds = _ref.areaIds;
   var index = client.initIndex('listings');
-  return autocomplete_js__WEBPACK_IMPORTED_MODULE_0___default()(selector, {}, [{
+  var areaFilters = 'area.id = ' + areaIds.join(' OR area.id = ');
+  var filters = areaFilters;
+
+  if (typeof categoryId !== 'undefined') {
+    filters = filters + ' AND category.id != ' + categoryId;
+  }
+
+  var sources = [{
     source: autocomplete_js__WEBPACK_IMPORTED_MODULE_0___default.a.sources.hits(index, {
-      hitsPerPage: 5
+      hitsPerPage: 5,
+      filters: filters + ' AND live = 1'
     }),
     templates: {
+      header: function header() {
+        if (typeof categoryId !== 'undefined') {
+          return '<div class="algolia-suggestions-category">Other categories</div>';
+        }
+
+        return '<div class="algolia-suggestions-category">All categories</div>';
+      },
       suggestion: function suggestion(_suggestion) {
-        return '<span>' + _suggestion.title + '</span>';
+        return '<span><a href="/' + _suggestion.area.slug + '/' + _suggestion.id + '">' + _suggestion.title + '</a> in ' + _suggestion.category.name + '</span> <span>' + _suggestion.created_at_human + ' &bull; ' + _suggestion.area.name + '</span>';
       }
     },
     displayKey: 'title',
     empty: '<div class="aa-empty">No listings found</div>'
-  }]);
+  }];
+
+  if (typeof categoryId !== 'undefined') {
+    sources.unshift({
+      source: autocomplete_js__WEBPACK_IMPORTED_MODULE_0___default.a.sources.hits(index, {
+        hitsPerPage: 5,
+        filters: '(' + areaFilters + ') AND category.id = ' + categoryId + ' AND live = 1'
+      }),
+      templates: {
+        header: '<div class="algolia-suggestions-category">This category</div>',
+        suggestion: function suggestion(_suggestion2) {
+          return '<span><a href="/' + _suggestion2.area.slug + '/' + _suggestion2.id + '">' + _suggestion2.title + '</a> </span> <span>' + _suggestion2.created_at_human + ' &bull; ' + _suggestion2.area.name + '</span>';
+        }
+      },
+      displayKey: 'title',
+      empty: '<div class="aa-empty">No listings found</div>'
+    });
+  }
+
+  return autocomplete_js__WEBPACK_IMPORTED_MODULE_0___default()(selector, {}, sources);
 };
 
 /***/ }),
